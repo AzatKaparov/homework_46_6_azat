@@ -21,8 +21,8 @@ a {
     color: white;
     display: block;
     text-transform: uppercase;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     background-color: cornflowerblue;
 }
 
@@ -31,4 +31,15 @@ a {
     display: inline-block;
     padding: 30px;
     margin-bottom: 15px;
+}
+
+#more{
+    text-decoration: none;
+    color: white;
+    display: block;
+    text-transform: uppercase;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: cornflowerblue;
+    margin-top: 5px;
 }

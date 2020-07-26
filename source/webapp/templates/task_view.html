@@ -11,9 +11,10 @@
 </head>
 <body>
 <div class="container">
-    <h1>Описание: {{ task.description }}</h1>
-    <p>Статус: {{ task.get_status_display }}</p>
-    <p>Дата: {{ task.date }}</p>
+    <h1>{{ task.description }}</h1>
+    <p>{{ task.get_status_display }}</p>
+    <p>{{ task.date }}</p>
+    <p>{{ task.more }}</p>
     <p><a href="/">На главную</a></p>
 </div>
 </body>

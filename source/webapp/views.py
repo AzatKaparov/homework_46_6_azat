@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from webapp.models import Task, STATUS_CHOICES
-from django.http import HttpResponseRedirect, HttpResponseNotFound
+from django.http import HttpResponseNotFound
+from django.urls import reverse
 
 
 def index_view(request):
@@ -10,7 +11,7 @@ def index_view(request):
     })
 
 
-def task_add_view(request):
+def task_add_view(request, *args, **kwargs):
     if request.method == "GET":
         return render(request, 'task_add.html', context={
             'status_choices': STATUS_CHOICES
@@ -19,15 +20,21 @@ def task_add_view(request):
         description = request.POST.get('description')
         status = request.POST.get('status')
         date = request.POST.get('date')
-        task = Task.objects.create(description=description, status=status, date=date)
-        context = {'task': task}
-        return render(request, 'task_view.html', context)
+        more = request.POST.get('more')
+        task = Task.objects.create(description=description, status=status, date=date, more=more)
+        return redirect('article_view', pk=task.pk)
 
 
-def delete(request, id):
+def delete(request, pk):
     try:
-        task = Task.objects.get(id=id)
+        task = Task.objects.get(pk=pk)
         task.delete()
-        return HttpResponseRedirect("/")
+        return redirect('index')
     except Task.DoesNotExist:
         return HttpResponseNotFound("<h2>Task not found</h2>")
+
+
+def task_view(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    context = {'task': task}
+    return render(request, 'task_view.html', context)

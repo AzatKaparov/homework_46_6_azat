@@ -11,10 +11,10 @@
 </head>
 <body>
 <div class="container">
-<a href="/">На главную</a>
+<a href="{% url 'index' %}">На главную</a>
 <h1>Добавить задачу</h1>
 
-<form action="/tasks/add/" method="post">
+<form action="{% url 'task_add' %}" method="post">
     {% csrf_token %}
     <label>Описание</label><br/>
     <input type="text" name="description"/><br/>
@@ -28,6 +28,8 @@
             <option value="{{ value }}">{{ label }}</option>
         {% endfor %}
     </select><br/>
+    <p>Более подробное описание (необязательно)</p>
+    <p><textarea rows="10" cols="60" name="more"></textarea></p>
     <br/>
     <input type="submit" value="Send"/>
 </form>
