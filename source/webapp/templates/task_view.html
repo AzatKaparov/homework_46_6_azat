@@ -1,21 +1,14 @@
-{% load staticfiles %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>View</title>
-    <link rel="stylesheet" href="{% static 'css/view.css' %}">
-</head>
-<body>
-<div class="container">
+{% extends "base.html" %}
+
+{% block title %}View{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="/source/webapp/static/css/view.css">
+{% endblock %}
+
+{% block content %}
     <h1>{{ task.description }}</h1>
     <p>{{ task.get_status_display }}</p>
     <p>{{ task.date }}</p>
     <p>{{ task.more }}</p>
-    <p><a href="/">На главную</a></p>
-</div>
-</body>
-</html>
+    <p><a href="{% url 'index' %}">На главную</a></p>
+{% endblock %}

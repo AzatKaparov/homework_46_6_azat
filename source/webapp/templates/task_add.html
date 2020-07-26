@@ -1,38 +1,29 @@
-{% load staticfiles %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add</title>
-    <link rel="stylesheet" href="{% static 'css/add.css' %}">
-</head>
-<body>
-<div class="container">
-<a href="{% url 'index' %}">На главную</a>
-<h1>Добавить задачу</h1>
+{% extends "base.html" %}
 
-<form action="{% url 'task_add' %}" method="post">
-    {% csrf_token %}
-    <label>Описание</label><br/>
-    <input type="text" name="description"/><br/>
+{% block title %}Create{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="/source/webapp/static/css/add.css">
+{% endblock %}
 
-    <label>Дата (ГГГГ-ММ-ДД)</label><br/>
-    <input type="text" name="date"/><br/>
+{% block content %}
+    <h1>Добавить задачу</h1>
+    <form action="{% url 'task_add' %}" method="post">
+        {% csrf_token %}
+        <label>Описание</label><br/>
+        <input type="text" name="description"/><br/>
 
-    <label for="id-status">Статус:</label><br/>
-    <select name="status" id="id-status">
-        {% for value, label in status_choices %}
-            <option value="{{ value }}">{{ label }}</option>
-        {% endfor %}
-    </select><br/>
-    <p>Более подробное описание (необязательно)</p>
-    <p><textarea rows="10" cols="60" name="more"></textarea></p>
-    <br/>
-    <input type="submit" value="Send"/>
-</form>
-</div>
-</body>
-</html>
+        <label>Дата (ГГГГ-ММ-ДД)</label><br/>
+        <input type="text" name="date"/><br/>
+
+        <label for="id-status">Статус:</label><br/>
+        <select name="status" id="id-status">
+            {% for value, label in status_choices %}
+                <option value="{{ value }}">{{ label }}</option>
+            {% endfor %}
+        </select><br/>
+        <p>Более подробное описание (необязательно)</p>
+        <p><textarea rows="10" cols="60" name="more"></textarea></p>
+        <br/>
+        <input type="submit" value="Send"/>
+    </form>
+{% endblock %}

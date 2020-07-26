@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from webapp.models import Task, STATUS_CHOICES
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 
 
@@ -22,7 +22,8 @@ def task_add_view(request, *args, **kwargs):
         date = request.POST.get('date')
         more = request.POST.get('more')
         task = Task.objects.create(description=description, status=status, date=date, more=more)
-        return redirect('article_view', pk=task.pk)
+        url = reverse('task_view', kwargs={'pk': task.pk})
+        return HttpResponseRedirect(url)
 
 
 def delete(request, pk):
